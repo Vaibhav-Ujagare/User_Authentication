@@ -3,8 +3,10 @@ import {
   loginUser,
   registerUser,
   verifyEmail,
+  logoutUser,
 } from "../auth/auth.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
+import { isLoggedIn } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
@@ -22,4 +24,7 @@ router.route("/register").post(
 router.get("/verify/:token", verifyEmail);
 
 router.route("/login").post(loginUser);
+
+router.post("/logout", isLoggedIn, logoutUser);
+
 export default router;
